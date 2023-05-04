@@ -1,7 +1,7 @@
 const { response } = require("express");
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT || 3000;
 const axios = require("axios").default;
 
 // API KEYS

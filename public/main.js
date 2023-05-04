@@ -1,5 +1,3 @@
-const SERVER = "http://127.0.0.1:8888"
-
 function search_yelp(inp_keyword, inp_distance, inp_category, inp_page_num, inp_location) {
     const keyword = inp_keyword;
     const distance = inp_distance;
@@ -8,7 +6,7 @@ function search_yelp(inp_keyword, inp_distance, inp_category, inp_page_num, inp_
     const location = inp_location;
 
     var request = new XMLHttpRequest();
-    api_string = SERVER + "/search_yelp?keyword=" + keyword + "&distance=" +distance + "&category=" + category + "&page_num=" + page_num + "&location=" + location;
+    api_string = "/search_yelp?keyword=" + keyword + "&distance=" +distance + "&category=" + category + "&page_num=" + page_num + "&location=" + location;
     console.log(api_string)
     request.open("GET", api_string);
     request.send();
@@ -123,7 +121,7 @@ function build_table(data, keyword, distance, category, page_num, location) {
 function get_business_details(id) {
     var request = new XMLHttpRequest();
 
-    api_string = SERVER + "/get_business_details?id=" + id;
+    api_string = "/get_business_details?id=" + id;
     request.open("GET", api_string);
     request.send();
 

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const SERVER = "http://127.0.0.1:8888"
+const SERVER = "http://127.0.0.1:3000"
 
 test('fetches data from the search API', async () => {
 
