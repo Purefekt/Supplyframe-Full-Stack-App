@@ -16,12 +16,12 @@ function search_yelp(inp_keyword, inp_distance, inp_category, inp_page_num, inp_
         if (request.status === 200) {
             response = request.responseText;
             console.log(response)
-            search_box_input(response);
+            search_box_input(response, keyword, distance, category, page_num, location);
         }
     }
 }
 
-function search_box_input(data) {
+function search_box_input(data, keyword, distance, category, page_num, location) {
     var div_no_result = document.getElementById("no_result");
     var div_table = document.getElementById("data_table");
 
@@ -35,6 +35,10 @@ function search_box_input(data) {
         // else hide no records found message and show and build the table
         div_no_result.style.display = "none";
         div_table.style.display = "block";
-        
+        build_table(data, keyword, distance, category, page_num, location);
     }
+}
+
+function build_table(data, keyword, distance, category, page_num, location) {
+
 }
