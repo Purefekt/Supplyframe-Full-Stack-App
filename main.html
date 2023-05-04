@@ -15,7 +15,7 @@
 			  <div class="col-md-6 offset-md-3">
 				<h1 class="text-center" style="color: white;">Business Search</h1>
                 <h5 class="text-center" style="color: white;"> Fill out the form to get businesses near you! </h5>
-				<form class="mt-5 mb-3">
+				<form class="mt-5 mb-3" id="form" action="javascript:void(0)" method="get" onsubmit="search_yelp(input_keyword.value, input_distance.value, select_category.value, 0, input_location.value)">
 					<div class="form-group">
 						<label for="input_keyword" style="color: white">Keyword</label>
 						<input type="text" required id="input_keyword" class="form-control">
@@ -57,46 +57,55 @@
 
 		</br>
 
+		<!-- If there is no data for this search query -->
+		<div class="alert alert-danger text-center" role="alert" id="no_result" style="display: none;">
+			No record has been found.
+		</div>
+		
+		<!-- If data exists then show the table -->
+		<div id="data_table">
+			<table class="table table-striped">
+				<thead>
+				  <tr>
+					<th scope="col">#</th>
+					<th scope="col">First</th>
+					<th scope="col">Last</th>
+					<th scope="col">Handle</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<th scope="row">1</th>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+				  </tr>
+				  <tr>
+					<th scope="row">2</th>
+					<td>Jacob</td>
+					<td>Thornton</td>
+					<td>@fat</td>
+				  </tr>
+				  <tr>
+					<th scope="row">3</th>
+					<td>Larry</td>
+					<td>the Bird</td>
+					<td>@twitter</td>
+				  </tr>
+				</tbody>
+			  </table>
+			  <nav aria-label="Page navigation example">
+				<ul class="pagination">
+				  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+				  <li class="page-item"><a class="page-link" href="#">1</a></li>
+				  <li class="page-item"><a class="page-link" href="#">2</a></li>
+				  <li class="page-item"><a class="page-link" href="#">3</a></li>
+				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+				</ul>
+			  </nav>
+		</div>
 
-		  <table class="table table-striped">
-			<thead>
-			  <tr>
-				<th scope="col">#</th>
-				<th scope="col">First</th>
-				<th scope="col">Last</th>
-				<th scope="col">Handle</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
-			  </tr>
-			  <tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-			  </tr>
-			  <tr>
-				<th scope="row">3</th>
-				<td>Larry</td>
-				<td>the Bird</td>
-				<td>@twitter</td>
-			  </tr>
-			</tbody>
-		  </table>
-		  <nav aria-label="Page navigation example">
-			<ul class="pagination">
-			  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-			  <li class="page-item"><a class="page-link" href="#">1</a></li>
-			  <li class="page-item"><a class="page-link" href="#">2</a></li>
-			  <li class="page-item"><a class="page-link" href="#">3</a></li>
-			  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
-		  </nav>
+
 	</div>
 
 	<script type="text/javascript" src="main.js"></script>

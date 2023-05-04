@@ -25,33 +25,33 @@ app.get("/", (req, res) => {
 });
 
 // /search?form_keyword=pizza&form_distance=10&form_category=all&form_location=USC&page_num=0
-app.get("/search", async (req, res) => {
+app.get("/search_yelp", async (req, res) => {
     console.log("/search running")
 
-    const form_keyword = req.query.form_keyword;
-    var form_distance = req.query.form_distance;
-    const form_category = req.query.form_category;
-    var form_location = req.query.form_location;
+    const keyword = req.query.keyword;
+    var distance = req.query.distance;
+    const category = req.query.category;
+    const page_num = req.query.page_num;
+    const location = req.query.location;
     var lat;
     var lng;
-    const limit = 3;
-    var page_num = req.query.offset;
+    const limit = 5;
 
     // get the offset which is the page number * limit
     const offset = limit * parseInt(page_num)
 
     // convert miles distance into INT meters and if no distance was entered, set it to 10 miles (16093m)
-    if (form_distance == "") {
-        form_distance = 16093;
+    if (distance == "") {
+        distance = 16093;
     } else {
-        form_distance = parseInt(form_distance * 1609.344);
+        distance = parseInt(distance * 1609.344);
     }
 
     // get latitude and longitude of the location using google geocoding api
     try {
         var google_data = await axios
                 .get(
-                    `https://maps.googleapis.com/maps/api/geocode/json?address=${form_location}&key=${GOOGLE_API_KEY}`
+                    `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${GOOGLE_API_KEY}`
                 )
                 .then((response) => response.data);
             lat = google_data["results"][0]["geometry"]["location"]["lat"];
@@ -61,10 +61,12 @@ app.get("/search", async (req, res) => {
         return;
     }
 
-    console.log(`Keyword => ${form_keyword}`);
-    console.log(`Distance in meters =>${form_distance}`);
-    console.log(`Category => ${form_category}`);
-    console.log(`Location with Flag => ${form_location}`);
+    console.log(`Keyword => ${keyword}`);
+    console.log(`Distance in meters =>${distance}`);
+    console.log(`Category => ${category}`);
+    console.log(`Page number => ${page_num}`);
+    console.log(`Offset => ${offset}`);
+    console.log(`Location with Flag => ${location}`);
     console.log(`Latitude => ${lat}`);
     console.log(`Longitude => ${lng}`);
 
@@ -72,7 +74,7 @@ app.get("/search", async (req, res) => {
     try {
         var yelp_data_table = await axios
             .get(
-                `https://api.yelp.com/v3/businesses/search?term=${form_keyword}&latitude=${lat}&longitude=${lng}&categories=${form_category}&radius=${form_distance}&limit=${limit}&offset=${offset}`,
+                `https://api.yelp.com/v3/businesses/search?term=${keyword}&latitude=${lat}&longitude=${lng}&categories=${category}&radius=${distance}&limit=${limit}&offset=${offset}`,
                 { headers: headers }
             )
             .then((response) => response.data.businesses);
@@ -96,7 +98,7 @@ app.get("/search", async (req, res) => {
 
         res.send(JSON.stringify(data_table));
     } catch (error) {
-        res.send(JSON.stringify([]));
+        res.send(JSON.stringify({"no_result": 1}));
         return;
     }
 
