@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
     res.send("Veer's express server for SupplyFrame");
 });
 
-// /search?form_keyword=pizza&form_distance=10&form_category=all&form_location=USC&page_num=0
+// /search_yelp?keyword=Pizza&distance=10&category=all&page_num=0&location=usc
 app.get("/search_yelp", async (req, res) => {
     console.log("/search running...")
 
@@ -103,6 +103,7 @@ app.get("/search_yelp", async (req, res) => {
     }
 })
 
+// /get_business_details?id=J7XaREYBkIiRlK2rnHNDXQ
 app.get("/get_business_details", async (req, res) => {
     console.log("/get_business_details running...");
 

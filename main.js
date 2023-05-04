@@ -9,6 +9,7 @@ function search_yelp(inp_keyword, inp_distance, inp_category, inp_page_num, inp_
 
     var request = new XMLHttpRequest();
     api_string = SERVER + "/search_yelp?keyword=" + keyword + "&distance=" +distance + "&category=" + category + "&page_num=" + page_num + "&location=" + location;
+    console.log(api_string)
     request.open("GET", api_string);
     request.send();
 
