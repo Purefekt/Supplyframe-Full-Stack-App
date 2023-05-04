@@ -20,8 +20,11 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(express.static('public'));
+
 app.get("/", (req, res) => {
-    res.send("Veer's express server for SupplyFrame");
+    res.sendFile(__dirname + '/public/main.html');
+    // res.send("Veer's express server for SupplyFrame");
 });
 
 // /search_yelp?keyword=Pizza&distance=10&category=all&page_num=0&location=usc
