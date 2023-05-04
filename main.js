@@ -63,7 +63,9 @@ function build_table(data, keyword, distance, category, page_num, location) {
         table.appendChild(new_row);
     }
 
+    const cur_page = parseInt(page_num) + 1
     // pagination bar. If it is the first page, keep Previous disabled. If we dont have results for next page, keep Next disabled.
+    pagination.innerHTML = ""
     var pagination_ul = document.createElement("ul");
     pagination_ul.setAttribute("class", "pagination");
     pagination.appendChild(pagination_ul)
@@ -82,6 +84,7 @@ function build_table(data, keyword, distance, category, page_num, location) {
         
         const span = document.createElement("span");
         span.setAttribute("class", "page-link");
+        span.setAttribute("onclick", `search_yelp("${keyword}", "${distance}", "${category}", "${parseInt(page_num)-1}", "${location}")`);
         span.textContent = "Previous";
         
         previous_li.appendChild(span);
@@ -89,13 +92,14 @@ function build_table(data, keyword, distance, category, page_num, location) {
     pagination_ul.appendChild(previous_li)
 
     var page_x_of_y_li = document.createElement("li");
-    page_x_of_y_li.innerHTML = "<li class='page-item disabled'><span class='page-link'>Page " + `${page_num+1}` + "</span></li>"
+    page_x_of_y_li.innerHTML = "<li class='page-item disabled'><span class='page-link'>Page " + `${cur_page}` + "</span></li>"
     pagination_ul.appendChild(page_x_of_y_li)
 
     const next_li = document.createElement("li");
     next_li.setAttribute("class", "page-item");
     const span = document.createElement("span");
     span.setAttribute("class", "page-link");
+    span.setAttribute("onclick", `search_yelp("${keyword}", "${distance}", "${category}", "${parseInt(page_num)+1}", "${location}")`);
     span.textContent = "Next";
     next_li.appendChild(span);
     pagination_ul.appendChild(next_li);
